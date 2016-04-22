@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Gerador de CPF</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link type="text/css" rel="stylesheet" href="css/all.css" />
+    <meta name="description" content="O site mais moderno e estiloso para gerar números de CPF válidos para uso em testes e desenvolvimento de sistemas" />
+    <meta name="keywords" content="cpf, gerar cpf, gerador de cpf" />
+    <meta property="og:url" content="http://geracpf.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Gerador de CPF" />
+    <meta property="og:description" content="O site mais moderno e estiloso para gerar números de CPF válidos para uso em testes e desenvolvimento de sistemas" />
+    <meta property="og:image" content="https://s3-sa-east-1.amazonaws.com/geracpf.com/css/images/cpf.png" />
+</head>
+<body>
+    <div id="fb-root"></div>
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.5";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <div class="logo"></div>
+    <div class="login-block">
+        <h1>Gerador de CPF</h1>
+        <input type="text" value="" id="cpf" readonly="readonly" />
+        <p><b>Atenção:</b> Os números de CPF aqui gerados são válidos de acordo com a regra de formação dos dígitos verificadores definida pela <a href="http://www.receita.fazenda.gov.br/aplicacoes/atcta/cpf/ConsultaPublica.asp">Receita Federal do Brasil</a>, e tem por propósito auxiliar profissionais da área de desenvolvimento e teste de sistemas. Não nos resposabilizamos pela forma como os números gerados são utilizados.</p>
+        <button onclick="document.getElementById('cpf').value=new CPF().generate()">Gerar Novo CPF</button>
+        <div class="social">
+            <div class="fb-like" data-href="http://geracpf.com" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="jss/all.js"></script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-37657299-5', 'auto');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>
