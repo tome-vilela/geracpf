@@ -3,14 +3,19 @@
 <head>
     <title>Gerador de CPF</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link type="text/css" rel="stylesheet" href="css/all.css" />
-    <meta name="description" content="O site mais moderno e estiloso para gerar números de CPF válidos para uso em testes e desenvolvimento de sistemas" />
+    <meta name="description" content="Gerar números de CPF válidos para uso em testes e desenvolvimento de sistemas" />
     <meta name="keywords" content="cpf, gerar cpf, gerador de cpf" />
     <meta property="og:url" content="http://geracpf.com" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Gerador de CPF" />
-    <meta property="og:description" content="O site mais moderno e estiloso para gerar números de CPF válidos para uso em testes e desenvolvimento de sistemas" />
+    <meta property="og:description" content="Gerar números de CPF válidos para uso em testes e desenvolvimento de sistemas" />
     <meta property="og:image" content="https://s3-sa-east-1.amazonaws.com/geracpf.com/css/images/cpf.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/all.css" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script type="text/javascript" src="jss/all.js"></script>
 </head>
 <body>
     <div id="fb-root"></div>
@@ -24,17 +29,77 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
-    <div class="logo"></div>
-    <div class="login-block">
-        <h1>Gerador de CPF</h1>
-        <input type="text" value="" id="cpf" readonly="readonly" />
-        <p><b>Atenção:</b> Os números de CPF aqui gerados são válidos de acordo com a regra de formação dos dígitos verificadores definida pela <a href="http://www.receita.fazenda.gov.br/aplicacoes/atcta/cpf/ConsultaPublica.asp">Receita Federal do Brasil</a>, e tem por propósito auxiliar profissionais da área de desenvolvimento e teste de sistemas. Não nos resposabilizamos pela forma como os números gerados são utilizados.</p>
-        <button onclick="document.getElementById('cpf').value=new CPF().generate()">Gerar Novo CPF</button>
-        <div class="social">
-            <div class="fb-like" data-href="http://geracpf.com" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+    <div class="nav-container container">
+        <nav class="indigo lighten-1">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">Gerador de CPF</a>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col m8 input-field">
+                            <i class="material-icons prefix">lock</i>
+                            <input type="text" value="" id="cpf" readonly="readonly" />
+                        </div>
+                        <div class="col m4">
+                            <button class="btn waves-effect waves-light right" type="button" onclick="document.getElementById('cpf').value=new CPF().generate()">
+                                Gerar Novo CPF
+                                <i class="material-icons right">loop</i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p><b>Atenção:</b> Os números de CPF aqui gerados tem por propósito auxiliar profissionais da área de desenvolvimento e teste de sistemas. Não nos resposabilizamos pela forma como os números gerados são utilizados.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <script type="text/javascript" src="jss/all.js"></script>
+    <div class="container">
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div class="card-content">
+                    <h3>Algoritmo</h3>
+                    <p>Formata-se o número de inscrição no CPF da seguinte maneira: os nove primeiros dígitos são agrupados em três grupos de três dígitos separados por um ponto, seguidos de um hífen e dos dois últimos dígitos verificadores. Assim, o CPF de número <i>12345678909</i> é formatado como: <i>123.456.789-09</i></p>
+                    <p>Além do formato, há duas regras a serem seguidas:</p>
+                    <p style="margin-left: 40px;">
+                        <b>1.</b> Os primeiros nove números do CPF não podem ser todos iguais;
+                        <br><b>2.</b> Os dois dígitos verificadores devem respeitar a regra de formação;
+                    </p>
+                    <p>Os dígitos verificadores são calculados somando o produto de cada dígito que compõe o CPF por um peso e obtendo o resto da divisão dessa soma por 11.</p>
+                    <p>Acesse nosso <a href="https://github.com/tome-vilela/geracpf">repositório no GitHub</a> e obtenha o código fonte completo do algoritmo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div class="card-content">
+                    <h3>Estado de Emissão</h3>
+                    <p>Para determinar o estado brasileiro no qual um CPF foi emitido, é necessário obter o último algarismo do CPF, ignorando os dois dígitos verificadores.</p>
+                    <p>A partir deste algarismo utilize a tabela abaixo para determinar o estado de emissão:</p>
+                    <p style="margin-left: 40px;">
+                        <b>1.</b> Distrito Federal, Goiás, Mato Grosso do Sul e Tocantins;
+                        <br><b>2.</b> Pará, Amazonas, Acre, Amapá, Rondônia e Roraima;
+                        <br><b>3.</b> Ceará, Maranhão e Piauí;
+                        <br><b>4.</b> Pernambuco, Rio Grande do Norte, Paraíba e Alagoas;
+                        <br><b>5.</b> Bahia e Sergipe;
+                        <br><b>6.</b> Minas Gerais;
+                        <br><b>7.</b> Rio de Janeiro e Espírito Santo;
+                        <br><b>8.</b> São Paulo;
+                        <br><b>9.</b> Paraná e Santa Catarina;
+                        <br><b>0.</b> Rio Grande do Sul.
+                    </p>
+                    <p>Por exemplo, pode-se inferir que um número XXX.XXX.XX8-XX que termina com <b>8</b> foi emitido em São Paulo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
